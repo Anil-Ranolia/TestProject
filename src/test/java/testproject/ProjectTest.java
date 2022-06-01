@@ -1,11 +1,13 @@
 package testproject;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.*;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
+
 import java.util.Random;
 
 
@@ -20,7 +22,7 @@ public class ProjectTest {
         driver.manage().window().maximize();
     }
 
-    @Before
+    @BeforeMethod
     public void login() {
         WebElement email = driver.findElement(By.id("admin_email"));
         WebElement password = driver.findElement(By.id("admin_password"));
@@ -35,7 +37,7 @@ public class ProjectTest {
         }
     }
 
-    @After
+    @AfterMethod
     public void logout() throws InterruptedException {
         WebElement infinity = driver.findElement(By.xpath("//span[@class=\"user-avatar\"]"));
         infinity.click();
