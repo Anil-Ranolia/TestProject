@@ -6,11 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-
 import java.util.Random;
 
-import static org.junit.Assert.assertEquals;
 
 
 public class ProjectTest {
@@ -32,18 +29,19 @@ public class ProjectTest {
         WebElement submit = driver.findElement(By.xpath("(//button)[1]"));
         submit.click();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @After
-    public void logout(){
+    public void logout() throws InterruptedException {
         WebElement infinity = driver.findElement(By.xpath("//span[@class=\"user-avatar\"]"));
         infinity.click();
         WebElement logout = driver.findElement(By.xpath("(//a//span)[9]"));
         logout.click();
+        Thread.sleep(3000);
     }
 
     @Test
@@ -51,7 +49,7 @@ public class ProjectTest {
         WebElement projects = driver.findElement(By.xpath("(//a)[22]"));
         projects.click();
         try{
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -66,7 +64,7 @@ public class ProjectTest {
         WebElement fin_count = driver.findElement(By.xpath("(//td)[1]"));
         String final_count = String.valueOf(fin_count.getText());
 
-        if(initial_count != final_count){
+        if(!initial_count.equals(final_count)){
             System.out.println("The list is reversed");
         }
         else{
@@ -86,7 +84,7 @@ public class ProjectTest {
         WebElement startDate = driver.findElement(By.id("start_date"));
         WebElement endDate = driver.findElement(By.id("end_date"));
         projectName.sendKeys("Automation Selenium");
-        String projectCustomCode = "AUTOSEL416";
+        String projectCustomCode = "AUTOSEL" + (new Random().nextInt(800000) + 100);
         projectCode.sendKeys(projectCustomCode);
         projectDescription.sendKeys("This test is being run using Selenium");
         startDate.sendKeys("06122022");
@@ -116,13 +114,12 @@ public class ProjectTest {
         WebElement projectName = driver.findElement(By.id("project_name"));
         WebElement projectCode = driver.findElement(By.id("project_code"));
         WebElement projectDescription = driver.findElement(By.id("project_description"));
-        WebElement startDate = driver.findElement(By.id("start_date"));
-        WebElement endDate = driver.findElement(By.id("end_date"));
         projectName.clear();
         projectCode.clear();
         projectDescription.clear();
-        projectName.sendKeys("NewUsingSelenium");
-        String projectCustomCode = "UPDATED" + (new Random().nextInt(200) + 100);
+        int num = (new Random().nextInt(9000) + 100);
+        projectName.sendKeys("NewUsingSelenium" + num);
+        String projectCustomCode = "UPDATED" + num;
         projectCode.sendKeys(projectCustomCode);
         projectDescription.sendKeys("This test is being run using Selenium and it is updated later using Id " + projectCustomCode);
         WebElement update = driver.findElement(By.xpath("//button"));
@@ -144,52 +141,3 @@ public class ProjectTest {
         driver.quit();
     }
 }
-
-
-
-//package testproject;
-//
-//        import io.github.bonigarcia.wdm.WebDriverManager;
-//        import org.junit.Test;
-//        import org.openqa.selenium.By;
-//        import org.openqa.selenium.WebDriver;
-//        import org.openqa.selenium.WebElement;
-//        import org.openqa.selenium.chrome.ChromeDriver;
-//        import org.openqa.selenium.interactions.Actions;
-//
-//        import static org.junit.Assert.assertEquals;
-//
-
-//public class MyntraTest {
-//    @Test
-//    public void test() {
-//        WebDriverManager.chromedriver().setup();
-//        WebDriver driver = new ChromeDriver();
-//        driver.get("https://www.myntra.com");
-//        driver.manage().window().maximize();
-//        WebElement men = driver.findElement(By.xpath("(//a[contains(text(), 'Men')])[1]"));
-//        Actions action = new Actions(driver);
-//        action.moveToElement(men).perform();
-//        try{
-//            Thread.sleep(1000);
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//        WebElement phone_cases = driver.findElement(By.xpath("//a[contains(text(), 'Phone Cases')]"));
-//        phone_cases.click();
-//
-//        WebElement price = driver.findElement(By.xpath("(//span[@class='product-discountedPrice'])[1]"));
-//        String cost = String.valueOf(price.getText().split(" ")[1]);
-//
-//        assertEquals("849", cost);
-//        if(cost.equals("849")){
-//            System.out.println("Equal");
-//        }
-//        else{
-//            System.out.println("Not Equal");
-//        }
-//        driver.quit();
-//    }
-//}
