@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -47,7 +49,7 @@ public class ProjectTest {
     }
 
     @Test
-    public void changeListOrder(){
+    public void changeListOrder() throws CustomException {
         WebElement projects = driver.findElement(By.xpath("(//a)[22]"));
         projects.click();
         try{
@@ -70,12 +72,12 @@ public class ProjectTest {
             System.out.println("The list is reversed");
         }
         else{
-            System.out.println("The list is not reversed");
+            throw new CustomException("The list is not reversed");
         }
     }
 
     @Test
-    public void addProject() throws InterruptedException {
+    public void addProject() throws InterruptedException, CustomException {
         WebElement projects = driver.findElement(By.xpath("(//a)[22]"));
         projects.click();
         WebElement addButton = driver.findElement(By.xpath("(//a[@type=\"submit\"])[1]"));
@@ -101,14 +103,15 @@ public class ProjectTest {
             System.out.println("Project Added successfully");
         }
         else{
-            System.out.println("Project Adding failed");
+            throw new CustomException("Project Adding failed");
         }
     }
 
     @Test
-    public void updateProject() throws InterruptedException {
+    public void updateProject() throws InterruptedException, CustomException {
         WebElement projects = driver.findElement(By.xpath("(//a)[22]"));
         projects.click();
+        Thread.sleep(1000);
         WebElement read = driver.findElement(By.xpath("(//td)[11]"));
         String readCode = String.valueOf(read.getText());
         WebElement updateButton = driver.findElement(By.xpath("(//td//a)[2]"));
@@ -134,7 +137,7 @@ public class ProjectTest {
             System.out.println("Project Updated successfully");
         }
         else{
-            System.out.println("Project Updating failed");
+            throw new CustomException("Project updating Test Case Failed");
         }
     }
 
