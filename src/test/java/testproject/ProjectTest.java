@@ -50,7 +50,7 @@ public class ProjectTest {
 
     @Test
     public void changeListOrder() throws CustomException {
-        WebElement projects = driver.findElement(By.xpath("(//a)[22]"));
+        WebElement projects = driver.findElement(By.xpath("(//li//a//i)[23]"));
         projects.click();
         try{
             Thread.sleep(3000);
@@ -78,7 +78,7 @@ public class ProjectTest {
 
     @Test
     public void addProject() throws InterruptedException, CustomException {
-        WebElement projects = driver.findElement(By.xpath("(//a)[22]"));
+        WebElement projects = driver.findElement(By.xpath("(//li//a//i)[23]"));
         projects.click();
         WebElement addButton = driver.findElement(By.xpath("(//a[@type=\"submit\"])[1]"));
         addButton.click();
@@ -109,7 +109,7 @@ public class ProjectTest {
 
     @Test
     public void updateProject() throws InterruptedException, CustomException {
-        WebElement projects = driver.findElement(By.xpath("(//a)[22]"));
+        WebElement projects = driver.findElement(By.xpath("(//li//a//i)[23]"));
         projects.click();
         Thread.sleep(1000);
         WebElement read = driver.findElement(By.xpath("(//td)[11]"));
